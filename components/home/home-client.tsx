@@ -1040,7 +1040,7 @@ export function HomeClient() {
                 : "0 4px 40px rgba(0,0,0,0.5)",
             }}
           >
-            {isChaos ? "THE CHAOS ARCHIVE" : "Banasthali Diaries"}
+            {isChaos ? "Ctrl+S: Banasthali" : "Ctrl+S: Banasthali"}
           </h1>
           <p
             style={{
