@@ -82,7 +82,7 @@ const MOVIES = [
 ] as const;
 
 type MovieId = (typeof MOVIES)[number]["id"];
-type Theme = "nostalgia" | "chaos";
+export type Theme = "nostalgia" | "chaos";
 
 // ─────────────────────────────────────────────────────────────
 // PLAYLISTS
