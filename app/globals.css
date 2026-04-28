@@ -1,26 +1,97 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Defaults; overridden by [data-theme] below. */
+  --background: #fff9f0;
+  --foreground: #20130a;
+  --paper: #fff3e2;
+  --ink: #2a160c;
+  --accent: #b64b2a;
+
+  /* Typography (theme-mapped below) */
+  --font-serif: var(--font-playfair);
+  --font-handwritten: var(--font-caveat);
+  --font-loud: var(--font-bungee);
+
+  --font-title: var(--font-serif);
+  --font-note: var(--font-handwritten);
+
+  --chaos-overlay-opacity: 0;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-title);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+[data-theme="nostalgia"] {
+  --background: #fff9f0;
+  --foreground: #20130a;
+  --paper: #fff3e2;
+  --ink: #2a160c;
+  --accent: #b64b2a;
+  --chaos-glow: 0;
+
+  --font-serif: var(--font-playfair);
+  --font-handwritten: var(--font-caveat);
+  --font-title: var(--font-serif);
+  --font-note: var(--font-handwritten);
+
+  --chaos-overlay-opacity: 0;
+}
+
+[data-theme="chaos"] {
+  --background: #1a1a2e;
+  --foreground: #f7f7ff;
+  --paper: #121226;
+  --ink: #f7f7ff;
+  --accent: #39ff14;
+  --chaos-glow: 1;
+
+  /* Typography requirement: Playfair headers, Caveat notes */
+  --font-serif: var(--font-playfair);
+  --font-handwritten: var(--font-caveat);
+  --font-title: var(--font-playfair);
+  --font-note: var(--font-caveat);
+
+  --chaos-overlay-opacity: 0.22;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-title), ui-serif, Georgia, Cambria, "Times New Roman",
+    Times, serif;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  background-image: url("/assets/static/nostalgia/paper-texture-bg.png");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  opacity: 0.28;
+  pointer-events: none;
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background-image: url("/assets/static/chaos/wiggly-lines-bg.png");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  opacity: var(--chaos-overlay-opacity);
+  pointer-events: none;
+}
+
+::selection {
+  background: color-mix(in oklab, var(--accent) 28%, transparent);
+  color: var(--foreground);
 }
